@@ -53,7 +53,7 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --cache --fix",
-      "yarn test run"
+      "vitest related --run"
     ],
     "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
   }

@@ -8,6 +8,9 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './setupTests.ts',
+    threads: false,
+    watch: false,
+    include: ['**/__tests__/*.{ts,tsx}'],
   },
   plugins: [react()],
   resolve: {
