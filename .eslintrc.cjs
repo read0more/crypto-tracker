@@ -9,7 +9,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
-    'airbnb',
     'airbnb-typescript',
     'prettier',
   ],
@@ -23,9 +22,14 @@ module.exports = {
     sourceType: 'module',
     project: ['./tsconfig.json'],
   },
-  plugins: ['react', '@typescript-eslint', 'prettier'],
+  plugins: ['react', '@typescript-eslint', 'import', 'prettier'],
   rules: {
-    'prettier/prettier': 'error',
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/tests/*", "**/testDoubles/**/*"]}]
+    'import/extensions': ['off'],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: ['**/*.test.ts', '**/*.test.tsx', '**/testDoubles/**/*'],
+      },
+    ],
   },
 };
