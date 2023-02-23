@@ -9,6 +9,8 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
+    'airbnb',
+    'airbnb-typescript',
     'prettier',
   ],
   overrides: [],
@@ -19,6 +21,7 @@ module.exports = {
     },
     ecmaVersion: 'latest',
     sourceType: 'module',
+    project: ['./tsconfig.json'],
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
