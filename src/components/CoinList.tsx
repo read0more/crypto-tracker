@@ -13,5 +13,20 @@ export default function CoinList() {
 
   if (error instanceof Error) return <div>{error.message}</div>;
 
-  return <div>{data && data.map(({ id }) => <div key={id}>{id}</div>)}</div>;
+  return (
+    <div>
+      <ul>
+        {data &&
+          data.map(({ id, symbol }) => (
+            <li key={id}>
+              <img
+                src={`https://coinicons-api.vercel.app/api/icon/${symbol.toLocaleLowerCase()}`}
+                alt={id}
+              />
+              <b>{id}</b>
+            </li>
+          ))}
+      </ul>
+    </div>
+  );
 }
