@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Reset } from 'styled-reset';
-import CoinList from './components/CoinList';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { RouterProvider } from 'react-router-dom';
+import Router from './Router';
 
 const queryClient = new QueryClient();
 const GlobalStyle = createGlobalStyle`
@@ -48,7 +49,7 @@ function App() {
         <button onClick={toggleTheme}>Toggle {currentThemeName} mode</button>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-          <CoinList />
+          <RouterProvider router={Router} />
         </ThemeProvider>
       </QueryClientProvider>
     </>

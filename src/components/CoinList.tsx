@@ -2,11 +2,15 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Coins } from '@/types/CoinPaprika';
 import { getCoinList } from '@/api';
+// import fakeList from '@/testDoubles/fakes/fakeList.json';
+import { useNavigate } from 'react-router-dom';
 
 export default function CoinList() {
+  const navigate = useNavigate();
   const { isLoading, error, data } = useQuery<Coins[]>({
     queryKey: ['coinList'],
     queryFn: () => getCoinList(),
+    // queryFn: () => new Promise((resolve) => resolve(fakeList as Coins[])).then((res) => res as Coins[])
   });
 
   if (isLoading) return <div>Loading...</div>;
@@ -17,8 +21,8 @@ export default function CoinList() {
     <div>
       <ul>
         {data &&
-          data.map(({ id, symbol }) => (
-            <li key={id}>
+          data.slice(0, 10).map(({ id, symbol }) => (
+            <li key={id} onClick={() => navigate(`/${id}`)}>
               <img
                 src={`https://coinicons-api.vercel.app/api/icon/${symbol.toLocaleLowerCase()}`}
                 alt={id}

@@ -25,11 +25,16 @@ module.exports = {
   plugins: ['react', '@typescript-eslint', 'import', 'prettier'],
   rules: {
     'import/extensions': ['off'],
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: ['**/*.test.ts', '**/*.test.tsx', '**/testDoubles/**/*'],
-      },
-    ],
+    'import/no-extraneous-dependencies': ['off']
+    // 'import/no-extraneous-dependencies': [
+    //   'error',
+    //   {
+    //     devDependencies: [
+    //       '**/*.test.ts',
+    //       '**/*.test.tsx',
+    //       '**/testDoubles/**/*',
+    //     ],
+    //   },
+    // ],
   },
 };
