@@ -13,6 +13,16 @@ export default createBrowserRouter([
       {
         path: '/:id',
         element: <Detail />,
+        children: [
+          {
+            path: 'price',
+            element: <div>price</div>,
+          },
+          {
+            path: 'chart',
+            element: <div>chart</div>,
+          },
+        ],
       },
     ],
     // path: '/',
