@@ -2,6 +2,8 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Detail from '@/pages/Detail';
 import Home from '@/pages/Home';
+import PriceTab from './components/PriceTab';
+import ChartTab from './components/ChartTab';
 
 export default createBrowserRouter([
   {
@@ -15,42 +17,16 @@ export default createBrowserRouter([
         element: <Detail />,
         children: [
           {
-            path: 'price',
-            element: <div>price</div>,
+            path: 'chart',
+            element: <ChartTab />,
           },
           {
-            path: 'chart',
-            element: <div>chart</div>,
+            path: 'price',
+            element: <PriceTab />,
           },
         ],
       },
     ],
-    // path: '/',
-    // element: <Home />,
-    // children: [
-    //   {
-    //     path: '/',
-    //     element: <Home />,
-    //   },
-    //   {
-    //     path: 'about',
-    //     element: <About />,
-    //   },
-    //   {
-    //     path: 'user/:id',
-    //     element: <User />,
-    //     children: [
-    //       {
-    //         path: 'follower',
-    //         element: <Follower />,
-    //       },
-    //       {
-    //         path: 'following',
-    //         element: <Following />,
-    //       },
-    //     ],
-    //   },
-    // ],
     errorElement: <div>404</div>,
   },
 ]);

@@ -102,3 +102,14 @@ export interface CoinPrice {
   last_updated: string;
   quotes: Quote;
 }
+
+export interface CoinDetailPrice {
+  time_open: string;
+  time_close: string;
+  open: string;
+  high: string;
+  low: string;
+  close: string;
+  volume: string;
+  market_cap: string;
+}
