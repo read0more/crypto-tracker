@@ -1,13 +1,17 @@
-import CoinDetailNav from '@/components/CoinDetailNav';
 import React from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import CoinDetailDescription from '@/components/CoinDetailDescription';
+import CoinDetailNav from '@/components/CoinDetailNav';
+import { Outlet, useParams, useNavigate } from 'react-router-dom';
 
 export default function Detail() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   return (
     <div>
       Detail: {id}
+      <button onClick={() => navigate('/')}>⬅️</button>
+      <CoinDetailDescription coinId='id' />
       <CoinDetailNav />
       <Outlet context={{ id }} />
     </div>

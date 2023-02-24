@@ -62,6 +62,6 @@ describe('CoinList', () => {
   it('리스트 클릭하면 해당 detail 페이지로 가는지', async () => {
     const { findByText } = renderCoinList();
     (await findByText(list[0].id)).click();
-    expect(navigate).toHaveBeenCalledWith(`/${list[0].id}`);
+    expect(navigate).toHaveBeenCalledWith(`/${list[0].id}/chart`);
   });
 });

@@ -22,7 +22,7 @@ export default function CoinList() {
       <ul>
         {data &&
           data.slice(0, 10).map(({ id, symbol }) => (
-            <li key={id} onClick={() => navigate(`/${id}`)}>
+            <li key={id} onClick={() => navigate(`/${id}/chart`)}>
               <img
                 src={`https://coinicons-api.vercel.app/api/icon/${symbol.toLocaleLowerCase()}`}
                 alt={id}
