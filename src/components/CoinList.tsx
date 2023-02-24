@@ -1,12 +1,12 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Coins } from '@/types/CoinPaprika';
+import { getCoinList } from '@/api';
 
 export default function CoinList() {
   const { isLoading, error, data } = useQuery<Coins[]>({
     queryKey: ['coinList'],
-    queryFn: () =>
-      fetch('https://api.coinpaprika.com/v1/coins').then((res) => res.json()),
+    queryFn: () => getCoinList(),
   });
 
   if (isLoading) return <div>Loading...</div>;
