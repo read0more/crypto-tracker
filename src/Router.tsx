@@ -5,28 +5,33 @@ import Home from '@/pages/Home';
 import PriceTab from './components/PriceTab';
 import ChartTab from './components/ChartTab';
 
-export default createBrowserRouter([
+export default createBrowserRouter(
+  [
+    {
+      children: [
+        {
+          path: '/',
+          element: <Home />,
+        },
+        {
+          path: '/:id',
+          element: <Detail />,
+          children: [
+            {
+              path: 'chart',
+              element: <ChartTab />,
+            },
+            {
+              path: 'price',
+              element: <PriceTab />,
+            },
+          ],
+        },
+      ],
+      errorElement: <div>404</div>,
+    },
+  ],
   {
-    children: [
-      {
-        path: '/',
-        element: <Home />,
-      },
-      {
-        path: '/:id',
-        element: <Detail />,
-        children: [
-          {
-            path: 'chart',
-            element: <ChartTab />,
-          },
-          {
-            path: 'price',
-            element: <PriceTab />,
-          },
-        ],
-      },
-    ],
-    errorElement: <div>404</div>,
-  },
-]);
+    basename: '/crypto-tracker',
+  }
+);

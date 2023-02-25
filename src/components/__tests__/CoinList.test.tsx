@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import CoinList from '@/components/CoinList';
 import fakeList from '@/testDoubles/fakes/fakeList.json';
@@ -36,6 +36,7 @@ describe('CoinList', () => {
   });
 
   afterEach(() => {
+    cleanup();
     vi.clearAllMocks();
   });
 

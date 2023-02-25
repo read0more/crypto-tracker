@@ -18,21 +18,17 @@ export default function ChartTab() {
     queryFn: () => getCoinDetailPrice(coinId),
   });
 
-  const chartData =
-    data?.map((item) => ({
-      x: new Date(item.time_open),
-      y: [item.open, item.high, item.low, item.close],
-    })) ?? [];
+  const chartData = Array.isArray(data)
+    ? data?.map((item) => ({
+        x: new Date(item.time_open),
+        y: [item.open, item.high, item.low, item.close],
+      }))
+    : [];
 
   const minIndex = chartData.length - 1 - visibleDataLength;
   const maxIndex = chartData.length - 1;
 
   const options: ApexOptions = {
-    grid: {
-      padding: {
-        right: 50, // 차트 canvas의 padding
-      },
-    },
     chart: {
       toolbar: {
         // toolbar를 숨기고 기본 선택을 좌우로 드래그 가능한 pan으로
@@ -41,12 +37,12 @@ export default function ChartTab() {
       },
     },
     title: {
-      text: `${coinId.toUpperCase()} Chart`, // 차트 이름
+      text: `${coinId.toUpperCase()} Chart`,
     },
     xaxis: {
-      type: 'datetime', // x축을 datetime 형식으로
+      type: 'datetime',
       labels: {
-        formatter: (value) => new Date(+value * 1000).toLocaleString(), // format을 Date locale string으로
+        formatter: (value) => new Date(+value * 1000).toLocaleString(),
       },
     },
   };
@@ -70,6 +66,8 @@ export default function ChartTab() {
       setVisibleDataLength(newVisibleDataLength);
     }
   };
+
+  // TODO: hex-hex등 일부 데이터 error에 400 - Price data not found 응답 받는 경우에 대한 처리
 
   if (isLoading) return <div>Loading...</div>;
 

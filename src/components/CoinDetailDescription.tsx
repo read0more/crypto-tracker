@@ -1,31 +1,40 @@
 import React from 'react';
-// import { getCoinList, getCoinPrice } from '@/api';
+import { getCoinDetail, getCoinPrice } from '@/api';
 import { CoinDetail, CoinPrice } from '@/types/CoinPaprika';
 import { useQuery } from '@tanstack/react-query';
-import fakeDetail from '@/testDoubles/fakes/fakeDetail.json';
-import fakePrice from '@/testDoubles/fakes/fakePrice.json';
+import styled from 'styled-components';
 
 interface Props {
   coinId: string;
 }
 
+const Ul = styled.ul`
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background-color: ${(props) => props.theme.textColor};
+  color: ${(props) => props.theme.backgroundColor};
+  border-radius: 0.5em;
+`;
+
+const I = styled.i`
+  display: block;
+  font-style: italic;
+  font-size: 1.2rem;
+  margin: 1.5em 0;
+`;
+
 export default function CoinDetailDescription({ coinId }: Props) {
   const { isLoading: detailLoading, data: detailData } = useQuery<CoinDetail>({
     queryKey: ['detail', coinId],
-    // queryFn: () => getCoinDetail(coinId),
-    queryFn: () =>
-      new Promise((resolve) => resolve(fakeDetail as CoinDetail)).then(
-        (res) => res as CoinDetail
-      ),
+    queryFn: () => getCoinDetail(coinId),
   });
 
   const { isLoading: priceLoading, data: priceData } = useQuery<CoinPrice>({
     queryKey: ['price', coinId],
-    // queryFn: () => getCoinDetail(coinId),
-    queryFn: () =>
-      new Promise((resolve) => resolve(fakePrice as CoinPrice)).then(
-        (res) => res as CoinPrice
-      ),
+    queryFn: () => getCoinPrice(coinId),
   });
 
   const loading = detailLoading || priceLoading;
@@ -34,12 +43,16 @@ export default function CoinDetailDescription({ coinId }: Props) {
 
   return (
     <div>
-      <h2>{detailData?.rank}</h2>
-      <h2>{detailData?.symbol}</h2>
-      <h2>{detailData?.open_source}</h2>
-      <h2>{detailData?.description}</h2>
-      <h2>{priceData?.total_supply}</h2>
-      <h2>{priceData?.max_supply}</h2>
+      <Ul>
+        <li>RANK: {detailData?.rank}</li>
+        <li>SYMBOL: {detailData?.symbol}</li>
+        <li>PRICE: ${priceData?.quotes?.USD.price}</li>
+      </Ul>
+      <I>{detailData?.description}</I>
+      <Ul>
+        <li>TOTAL SUPPLY: {priceData?.total_supply}</li>
+        <li>MAX SUPPLY: {priceData?.max_supply}</li>
+      </Ul>
     </div>
   );
 }

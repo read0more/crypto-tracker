@@ -1,16 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-// TODO: detail 페이지 하단 부분. 적절한 이름 생각나면 변경 필요
+const Ul = styled.ul`
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: 700;
+`;
+
+const StyledLink = styled(Link)`
+  padding: 1em;
+  margin: 1em;
+  cursor: pointer;
+  border-radius: 0.5em;
+  background-color: ${(props) => props.theme.textColor};
+  flex-basis: 50%;
+`;
+
 export default function CoinDetailNav() {
   return (
-    <ul>
-      <li>
-        <Link to='price'>Price</Link>
-      </li>
-      <li>
-        <Link to='chart'>Chart</Link>
-      </li>
-    </ul>
+    <nav>
+      <Ul>
+        <StyledLink to='price'>
+          <li>Price</li>
+        </StyledLink>
+        <StyledLink to='chart'>
+          <li>Chart</li>
+        </StyledLink>
+      </Ul>
+    </nav>
   );
 }

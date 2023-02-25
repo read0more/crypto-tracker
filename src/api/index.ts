@@ -10,6 +10,6 @@ export const getCoinPrice = (coinId: string) =>
   fetch(`${API_URL}/tickers/${coinId}`).then((res) => res.json());
 
 export const getCoinDetailPrice = (coinId: string) =>
-  fetch(`https://ohlcv-api.nomadcoders.workers.dev/?coinId=${coinId}`).then(
+  fetch(`https://ohlcv-api.nomadcoders.workers.dev?coinId=${coinId}`).then(
     (res) => res.json()
   );
