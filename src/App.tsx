@@ -7,7 +7,6 @@ import Router from './Router';
 
 const queryClient = new QueryClient();
 const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
   body {
     display: block;
     font-family: 'Roboto Condensed', sans-serif;
@@ -34,6 +33,19 @@ const darkTheme = {
   backgroundColor: '#13005A',
 };
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1024px;
+  margin: auto;
+`;
+
+const Button = styled.button`
+  align-self: flex-end;
+`;
+
 function App() {
   const [theme, setTheme] = useState(lightTheme);
   const currentThemeName = theme === lightTheme ? 'dark' : 'light';
@@ -42,19 +54,6 @@ function App() {
       prevTheme === lightTheme ? darkTheme : lightTheme
     );
   };
-
-  const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 1024px;
-    margin: auto;
-  `;
-
-  const Button = styled.button`
-    align-self: flex-end;
-  `;
 
   return (
     <>
