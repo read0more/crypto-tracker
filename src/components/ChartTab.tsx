@@ -6,6 +6,8 @@ import { useQuery } from '@tanstack/react-query';
 import { ApexOptions } from 'apexcharts';
 import ReactApexChart from 'react-apexcharts';
 import { useOutletContext } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { isDarkAtom } from '@/atoms';
 
 const INITIAL_LENGTH = 20; // 한 화면에 보여줄 데이터의 수. 수가 커질 수록 zoom out
 const ZOOM_RANGE = 2;
@@ -17,6 +19,7 @@ export default function ChartTab() {
     queryKey: ['chart', coinId],
     queryFn: () => getCoinDetailPrice(coinId),
   });
+  const isDark = useRecoilValue(isDarkAtom);
 
   const chartData = Array.isArray(data)
     ? data?.map((item) => ({
@@ -29,6 +32,9 @@ export default function ChartTab() {
   const maxIndex = chartData.length - 1;
 
   const options: ApexOptions = {
+    theme: {
+      mode: isDark ? 'dark' : 'light',
+    },
     chart: {
       toolbar: {
         // toolbar를 숨기고 기본 선택을 좌우로 드래그 가능한 pan으로
@@ -66,8 +72,6 @@ export default function ChartTab() {
       setVisibleDataLength(newVisibleDataLength);
     }
   };
-
-  // TODO: hex-hex등 일부 데이터 error에 400 - Price data not found 응답 받는 경우에 대한 처리
 
   if (isLoading) return <div>Loading...</div>;
 

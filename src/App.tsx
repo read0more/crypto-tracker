@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Reset } from 'styled-reset';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { RouterProvider } from 'react-router-dom';
 import Router from './Router';
+import { useRecoilState } from 'recoil';
+import { isDarkAtom } from './atoms';
 
 const queryClient = new QueryClient();
 const GlobalStyle = createGlobalStyle`
@@ -47,22 +49,18 @@ const Button = styled.button`
 `;
 
 function App() {
-  const [theme, setTheme] = useState(lightTheme);
-  const currentThemeName = theme === lightTheme ? 'dark' : 'light';
-  const toggleTheme = () => {
-    setTheme((prevTheme) =>
-      prevTheme === lightTheme ? darkTheme : lightTheme
-    );
-  };
+  const [isDark, setIsDark] = useRecoilState(isDarkAtom);
+  const currentThemeName = isDark ? 'dark' : 'light';
 
   return (
     <>
       <Reset />
+
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
           <GlobalStyle />
           <Container>
-            <Button onClick={toggleTheme}>
+            <Button onClick={() => setIsDark((prev) => !prev)}>
               Toggle {currentThemeName} mode
             </Button>
             <RouterProvider router={Router} />
