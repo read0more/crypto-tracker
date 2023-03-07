@@ -1,5 +1,6 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import CoinDetailNav from '@/components/CoinDetailNav';
 import { BrowserRouter } from 'react-router-dom';
@@ -18,7 +19,6 @@ function Wrapper({ children }: { children: JSX.Element }) {
   );
 }
 
-// TODO: Warning: An update to BrowserRouter inside a test was not wrapped in act(...). 해결 필요
 const renderCoinDetailNav = () => {
   return render(
     <Wrapper>
@@ -30,15 +30,19 @@ const renderCoinDetailNav = () => {
 };
 
 describe('CoinDetailNav', () => {
+  const user = userEvent.setup();
+
   it('Chart 탭 클릭하면 /chart로 url 바뀌는지', async () => {
-    const { findByText } = renderCoinDetailNav();
-    (await findByText('Chart')).click();
+    renderCoinDetailNav();
+    // fireEvent.click(screen.getByText('Chart'));
+    await user.click(screen.getByText('Chart'));
     expect(window.location.pathname).toBe(`/chart`);
   });
 
   it('Price 탭 클릭하면 /price로 url 바뀌는지', async () => {
-    const { findByText } = renderCoinDetailNav();
-    (await findByText('Price')).click();
+    renderCoinDetailNav();
+    // fireEvent.click(screen.getByText('Price'));
+    await user.click(screen.getByText('Price'));
     expect(window.location.pathname).toBe(`/price`);
   });
 });
